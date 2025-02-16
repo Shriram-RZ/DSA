@@ -9,14 +9,15 @@ public class Ceiling {
                 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
                 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
                 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-                81, 82, 83, 84, 85, 86, 87,88, 89, 90,
+                81, 82, 83, 84, 85, 86, 87, 89, 90,
                 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
 
         };
         int target = 88 ,start = 0 , end = array.length-1 , mid =0;
         boolean isAscending = array[start] > array[end] ? false : true;
+        boolean isFloor = false;
 
-        int answer = ceilingNumber(array,target,start,end,mid,isAscending);
+        int answer = ceilingNumber(array,target,start,end,mid,isAscending,isFloor);
         System.out.println("The BinarySearch Answer is : "+answer);
         int pointerAnswer = twoPointer(array,target,start,end);
         System.out.println("The TwoPointer Answer is : "+pointerAnswer);
@@ -24,7 +25,7 @@ public class Ceiling {
 
     }
 
-    static int ceilingNumber(int[] array, int target, int start, int end, int mid,boolean isAscending) {
+    static int ceilingNumber(int[] array, int target, int start, int end, int mid,boolean isAscending,boolean isFloor) {
         int steps =0;
         while(start <= end){
             mid = (start+end)/2;
@@ -48,7 +49,8 @@ public class Ceiling {
                 }
             }
         }
-        return isAscending?array[start]:array[end];
+
+        return !isFloor?isAscending?array[start]:array[end]:isAscending?array[end]:array[start];
     }
 
     static int twoPointer(int[] array,int target ,int start , int end){
